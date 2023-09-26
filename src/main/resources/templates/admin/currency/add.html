@@ -1,0 +1,51 @@
+<!doctype html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title> Create Currency</title>
+    <th:block th:replace="layout/layout.html::css"></th:block>
+    <th:block th:replace="layout/navbar.html::css"></th:block>
+</head>
+<body>
+<div layout:fragment="content" th:if="${#session.getAttribute('user').role=='user'}">
+    <h4><b>Bạn không có quyền truy cập vào trang web này</b></h4>
+</div>
+<div layout:fragment="content" th:unless="${#session.getAttribute('user').role=='user'}">
+    <div class="row my-4">
+        <div class="col-lg-7 col-12">
+            <div class="custom-block bg-white">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel"
+                         aria-labelledby="profile-tab" tabindex="0">
+                        <h6 class="mb-4">Create Currency</h6>
+                        <form class="custom-form profile-form" th:action="@{/currency/add}" method="post" role="form">
+                            <input class="form-control" type="text" name="name" id="name"
+                                   placeholder="name currency...">
+                            <h6 th:text="${err}"
+                                style="color: #d93838;font-size: 12px;margin-top: -18px;margin-left: 21px;"></h6>
+                            <input class="form-control" type="text" name="code" id="code"
+                                   placeholder="currency code ">
+                            <input class="form-control" type="number" name="transfer" id="transfer"
+                                   placeholder=" currency transfer ">
+                            <input class="form-control" type="text" name="symbol" id="symbol"
+                                   placeholder="currency symbol ">
+                            <div class="d-flex">
+                                <button type="submit" class="form-control me-3">
+                                    Create
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="layout/layout.html::script"></th:block>
+</th:block>
+</body>
+</html>

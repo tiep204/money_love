@@ -1,0 +1,73 @@
+<!doctype html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Wallet</title>
+    <th:block th:replace="layout/layout.html::css"></th:block>
+    <th:block th:replace="layout/navbar.html::css"></th:block>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row my-4">
+        <a th:href="@{/transaction/transfer}">
+            <button style="display: block;margin-left: 806px;margin-top: -25px;background-color: #a1e682;border: aliceblue;
+                       height: 41px;width: 227px;border-radius: 11px;">
+                TRANSFER MONEY
+            </button>
+        </a>
+        <th:block th:each="wallet:${listWallet}" th:object="${wallet}">
+            <div class="col-lg-7 col-12" style="margin-top: -23px;margin-bottom: 25px;">
+                <div class="custom-block custom-block-profile bg-white">
+                    <h6 class="mb-4" style="margin-top: -6px;display: flex;">Wallet Information
+                        <div class="dropdown ps-1" style="margin-left: 191px;">
+                            <a class="nav-link dropdown-toggle text-center" href="#" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi-three-dots-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu bg-white shadow"
+                                style="position: fixed;inset: 123px 29px auto 754px; margin: 0px;transform: translate3d(-86.4078px, 23.301px, 0px);">
+                                <li>
+                                    <a class="dropdown-item" th:href="@{/wallet/edit/{id}(id=${wallet.id})}">
+                                        <i class="bi bi-pencil-square"></i>
+                                        <b>Edit</b>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/wallet/delete/{id}(id=${wallet.id})}" class="dropdown-item"
+                                       onclick="return confirm('Bạn có muốn xóa ví không')">
+                                        <i class="bi bi-folder-minus"></i>
+                                        <b>Delete</b>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </h6>
+                    <p class="d-flex flex-wrap mb-2">
+                        <strong>Name</strong>
+                        <span><b th:text="*{name}"></b></span>
+                    </p>
+                    <p class="d-flex flex-wrap mb-2">
+                        <strong>Balance:</strong>
+                        $<span th:text="*{balance}"></span>
+                    </p>
+                    <p class="d-flex flex-wrap mb-2">
+                        <strong>Valid Date:</strong>
+                        <span th:text="*{#dates.format(createDate, 'dd/MM/yyyy')}"></span>
+                    </p>
+                </div>
+            </div>
+        </th:block>
+        <a th:href="@{/wallet/add}">
+            <button style="display: block; margin-left: 913px;margin-top: -44px;background-color: #a1e682;border: aliceblue;height: 61px;width: 64px;border-radius: 68px;">
+                <i class="bi bi-plus-lg"></i>
+            </button>
+        </a>
+    </div>
+</div>
+<th:block th:replace="layout/layout.html::script"></th:block>
+</body>
+</html>
